@@ -89,7 +89,7 @@ export default function TaskCard({
   });
 
   return (
-    <div className="bg-white dark:bg-[#292B31] rounded-lg shadow-sm p-4 space-y-2">
+    <div className="bg-white dark:bg-[#292B31] border border-gray-200 dark:border-none rounded-lg shadow-sm p-4 space-y-2">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-200">
           {title}

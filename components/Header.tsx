@@ -10,8 +10,8 @@ import BoardToolbar from "./BoardToolbar";
 
 export default function Header({ userName }) {
   return (
-    <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-[#2A2B2F]">
-      <div className="flex items-center justify-between px-6 py-4  ">
+    <header className="ml-4 pl-0 bg-white dark:bg-[#2A2B2F]">
+      <div className="flex items-center justify-between px-6 py-4 pl-0 ">
         <h1 className="text-xl font-semibold">Welcome back, {userName} 👋</h1>
         <div className="flex items-center space-x-4">
           <button className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">

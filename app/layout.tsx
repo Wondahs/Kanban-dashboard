@@ -46,7 +46,7 @@ export default async function RootLayout({ children }) {
         />
         <ThemeProvider>
         <Toaster position="top-right" />
-          <div className="font-exo flex min-h-screen bg-gray-100 dark:bg-[#2A2B2F] text-gray-900 dark:text-gray-100 overflow-hidden">
+          <div className="font-exo flex min-h-screen bg-white dark:bg-[#2A2B2F] text-gray-900 dark:text-gray-100 overflow-hidden">
             <Sidebar taskCounts={taskCounts} />
             <main className="flex-1 flex flex-col overflow-hidden">{children}</main>
           </div>

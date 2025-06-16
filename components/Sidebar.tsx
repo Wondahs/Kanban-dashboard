@@ -33,7 +33,7 @@ export default function Sidebar({ taskCounts }) {
   };
 
   return (
-    <aside className="bg-white dark:bg-[#222327] font-semibold text-gray-400 flex-shrink-0 flex flex-col">
+    <aside className="bg-white dark:bg-[#222327] drop-shadow-lg dark:shadow-none font-semibold text-gray-400 flex-shrink-0 flex flex-col">
       <div className="flex flex-row h-full">
         <div className="flex flex-row">
           <IconMenu />
@@ -42,7 +42,7 @@ export default function Sidebar({ taskCounts }) {
           <div className="px-4 py-4 text-2xl text-gray-800 dark:text-gray-200 font-bold border-0 border-gray-200 dark:border-gray-700">
             Projects
           </div>
-          <nav className="flex-1 overflow-y-auto">
+          <nav className="flex-1 overflow-y-auto mt-5">
             {menu.map((section) => (
               <div key={section.title}>
                 <button
