@@ -1,8 +1,10 @@
 'use client';
 
 import { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 
 export default function TaskCard({
   id,
@@ -13,6 +15,8 @@ export default function TaskCard({
   dueDate,
   assignedUsers = [],
 }) {
+  const router = useRouter();
+
   const percent = useMemo(() => {
     if (!progressTotal || progressTotal === 0) return 0;
     return Math.min(100, Math.round((progressCurrent / progressTotal) * 100));
@@ -24,18 +28,32 @@ export default function TaskCard({
     return 'bg-red-500';
   }, [percent]);
 
-  const deleteTask = async (id) => {
+  const deleteTask = async (id: string) => {
+    const toastId = toast.loading('Deleting task...');
+    try {
     await fetch(`/api/tasks`, {
       method: 'DELETE',
       body: JSON.stringify({ id }),
     });
+    toast.success('Task deleted successfully', { id: toastId });
+    router.refresh();
+    } catch (error) {
+      console.error(error);
+    }
   };
   
-  const updateProgress = async (id) => {
+  const updateProgress = async (id: string) => {
+    const toastId = toast.loading('Updating progress...');
+    try {
     await fetch(`/api/tasks`, {
       method: 'PUT',
       body: JSON.stringify({ id, fields: { progressCurrent: progressCurrent + 1 } }),
     });
+    toast.success('Progress updated successfully', { id: toastId });
+    router.refresh();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Only apply overlap if more than one user
@@ -73,7 +91,7 @@ export default function TaskCard({
   return (
     <div className="bg-white dark:bg-[#292B31] rounded-lg shadow-sm p-4 space-y-2">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-200">
           {title}
         </h3>
         <Menu as="div" className="relative ">
@@ -96,20 +114,20 @@ export default function TaskCard({
                   updateProgress(id);
                 }}
               >
-                Update Progress <br /> <span className="text-xs text-gray-500 dark:text-gray-300">Adds 1 to the current progress</span>
+                Update Progress <br /> <span className="text-xs text-gray-400 dark:text-gray-300">Adds 1 to the current progress</span>
               </button>
             </MenuItem>
           </MenuItems>
         </Menu>
       </div>
       {subtitle && (
-        <div className="text-xs text-gray-500 dark:text-gray-300">
+        <div className="text-xs text-gray-400">
           {subtitle}
         </div>
       )}
-      <div className="text-xs text-gray-500 dark:text-gray-300 flex justify-between">
+      <div className="text-xs text-gray-400 flex justify-between">
         <span>Progress</span>
-        <span>
+        <span className="text-gray-900 dark:text-gray-200">
           {progressCurrent}/{progressTotal}
         </span>
       </div>
@@ -119,7 +137,7 @@ export default function TaskCard({
           style={{ width: `${percent}%` }}
         />
       </div>
-      <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-300">
+      <div className="flex items-center justify-between text-xs text-gray-400">
         {dueDate ? (
           <span className="px-2 py-1 bg-gray-100 dark:bg-[#36373D] rounded-full">
             {new Date(dueDate).toLocaleDateString(undefined, {
@@ -134,7 +152,7 @@ export default function TaskCard({
         <div className="flex items-center">
           {avatarElements}
           {assignedUsers.length > 2 && (
-            <span className="text-xs text-gray-500 dark:text-gray-300 ml-2">
+            <span className="text-xs text-gray-400 ml-2">
               +{assignedUsers.length - 2}
             </span>
           )}

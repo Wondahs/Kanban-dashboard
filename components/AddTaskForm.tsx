@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function AddTaskForm({ statusKey, onClose }) {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function AddTaskForm({ statusKey, onClose }) {
       status: statusKey,
     };
     try {
+      const toastId = toast.loading('Creating task...');
       const res = await fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -34,10 +36,12 @@ export default function AddTaskForm({ statusKey, onClose }) {
         const data = await res.json();
         throw new Error(data.error || 'Failed to create');
       }
+      toast.success('Task created successfully', { id: toastId });
       router.refresh();
       onClose();
     } catch (e) {
       setError(e.message);
+      toast.error('Failed to create task');
     }
   };
 
@@ -78,7 +82,7 @@ export default function AddTaskForm({ statusKey, onClose }) {
             type="number"
             min="1"
             value={progressTotal}
-            onChange={(e) => setProgressTotal(e.target.value)}
+            onChange={(e) => setProgressTotal(Number(e.target.value))}
             className="w-full px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-600 text-gray-800 dark:text-gray-100 text-sm"
           />
         </div>
