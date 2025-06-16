@@ -17,7 +17,6 @@ export default function Header({ userName }) {
         <button className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
           <CalendarIcon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
         </button>
-        <ThemeToggle />
         <img
           src="https://api.dicebear.com/7.x/avataaars/svg?seed=John"
           alt="User avatar"
