@@ -10,7 +10,7 @@ export default function Board({ tasksByStatus }) {
   ];
 
   return (
-    <div className="flex flex-col text-gray-400 md:flex-row gap-4 p-4 h-full overflow-auto">
+    <div className="flex flex-col flex-wrap text-gray-400 md:flex-row gap-4 p-4 h-full overflow-auto custom-scrollbar">
       {columns.map((col) => (
         <TaskColumn
           key={col.key}

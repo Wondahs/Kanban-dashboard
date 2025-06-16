@@ -4,3 +4,61 @@
 @tailwind utilities;
 
 /* add overrides or CSS variables here if needed */
+
+/* Custom scrollbar styles */
+@layer utilities {
+  /* For Webkit browsers (Chrome, Safari, newer Edge) */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .custom-scrollbar:hover::-webkit-scrollbar {
+    opacity: 1;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    opacity: 1;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+
+  /* For Firefox */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.2s;
+  }
+
+  .custom-scrollbar:hover {
+    scrollbar-color: #888 transparent;
+  }
+
+  /* Dark mode styles */
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+
+  .dark .custom-scrollbar:hover {
+    scrollbar-color: #555 transparent;
+  }
+}

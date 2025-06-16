@@ -33,8 +33,8 @@ export default function Sidebar({ taskCounts }) {
   };
 
   return (
-    <aside className="bg-white dark:bg-[#222327] drop-shadow-lg dark:shadow-none font-semibold text-gray-400 flex-shrink-0 flex flex-col">
-      <div className="flex flex-row h-full">
+    <aside className="overflow-y-auto bg-white dark:bg-[#222327] drop-shadow-lg dark:shadow-none font-semibold text-gray-400 flex-shrink-0 flex flex-col custom-scrollbar">
+      <div className="flex flex-row h-screen">
         <div className="flex flex-row">
           <IconMenu />
         </div>
@@ -42,7 +42,7 @@ export default function Sidebar({ taskCounts }) {
           <div className="px-4 py-4 text-2xl text-gray-800 dark:text-gray-200 font-bold border-0 border-gray-200 dark:border-gray-700">
             Projects
           </div>
-          <nav className="flex-1 overflow-y-auto mt-5">
+          <nav className="flex-1 overflow-y-auto mt-5 custom-scrollbar">
             {menu.map((section) => (
               <div key={section.title}>
                 <button
@@ -78,7 +78,7 @@ export default function Sidebar({ taskCounts }) {
               </div>
             ))}
           </nav>
-          <div className="px-4 py-4 bottom-0 sticky mt-auto">
+          <div className="px-4 py-4 bottom-0">
             <ThemeToggle />
           </div>
         </div>
