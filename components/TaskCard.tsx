@@ -40,6 +40,7 @@ export default function TaskCard({
       toast.success('Task deleted successfully', { id: toastId });
       router.refresh();
     } catch (error) {
+      toast.error('Failed to delete token', {id: toastId})
       console.error(error);
     }
   };
@@ -54,6 +55,7 @@ export default function TaskCard({
       toast.success('Progress updated successfully', { id: toastId });
       router.refresh();
     } catch (error) {
+      toast.error('Failed to update progress', {id: toastId})
       console.error(error);
     }
   };

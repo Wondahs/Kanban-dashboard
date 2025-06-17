@@ -32,8 +32,8 @@ export default function Board({ tasksByStatus }) {
     }
 
     // Update the task status
+    const toastId = toast.loading('Updating task status...');
     try {
-      const toastId = toast.loading('Updating task status...');
       await fetch('/api/tasks', {
         method: 'PUT',
         headers: {
@@ -50,7 +50,7 @@ export default function Board({ tasksByStatus }) {
       router.refresh();
     } catch (error) {
       console.error('Error updating task status:', error);
-      toast.error('Failed to update task status');
+      toast.error('Failed to update task status', {id: toastId});
     }
   };
 
