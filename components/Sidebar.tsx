@@ -66,8 +66,8 @@ export default function Sidebar({ taskCounts }) {
                       <li key={item}>
                         <button className="flex w-full text-left px-4 py-0 ">
                           <div className="w-[1px] min-h-4 m-0 bg-gray-400"><span></span></div>
-                          <div className="w-5 h-[1px] m-0 my-auto mr-3 bg-gray-400"><span></span></div>
-                          <div className="hover:font-bold hover:text-gray-800 dark:hover:text-gray-200 px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-2xl">
+                          <div className="w-5 h-[1px] m-0 my-auto mr-2 bg-gray-400"><span></span></div>
+                          <div className="hover:font-bold hover:text-gray-800 dark:hover:text-gray-200 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-all duration-200">
                           <p className="m-0 p-0 h-min">{item}</p>
                           </div>
                         </button>

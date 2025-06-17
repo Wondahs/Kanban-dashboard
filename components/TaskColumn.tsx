@@ -18,7 +18,7 @@ export default function TaskColumn({
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div className="flex-1 min-w-[280px] max-w-full border-2 border-dashed border-gray-300 dark:border-none dark:bg-[#24262C] rounded-lg p-2">
+    <div className="flex-1 min-w-[280px] max-w-full border-2 border-dashed border-gray-300 dark:border-none dark:bg-[#24262C] rounded-xl p-3">
       <div className="flex items-center justify-between mb-2 px-2">
         <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
           {title} ({tasks.length})

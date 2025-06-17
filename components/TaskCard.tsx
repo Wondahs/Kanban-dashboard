@@ -97,7 +97,7 @@ export default function TaskCard({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`bg-white dark:bg-[#292B31] border border-gray-200 dark:border-none rounded-lg shadow-sm p-4 space-y-2 ${
+          className={`hover:bg-gray-100 dark:hover:bg-[#34373d] bg-white dark:bg-[#292B31] border border-gray-200 dark:border-none rounded-xl shadow-md p-5 space-y-2 ${
             snapshot.isDragging ? 'shadow-lg' : ''
           }`}
         >

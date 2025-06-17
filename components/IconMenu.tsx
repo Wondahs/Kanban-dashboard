@@ -5,6 +5,7 @@ import {
   BellIcon,
   ChatBubbleLeftRightIcon,
   Cog6ToothIcon,
+  ArrowRightEndOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 
 const iconMenu = [
@@ -14,15 +15,16 @@ const iconMenu = [
   { icon: <BellIcon className="h-6 w-6" />, label: 'Reminders' },
   { icon: <ChatBubbleLeftRightIcon className="h-6 w-6" />, label: 'Messengers' },
   { icon: <Cog6ToothIcon className="h-6 w-6" />, label: 'Settings' },
+  { icon: <ArrowRightEndOnRectangleIcon className="h-6 w-6 " />, label: 'Logout' },
 ];
 
 export default function IconMenu() {
   return (
     <div className="flex flex-col items-center gap-6 py-6 border-b bg-[#1C1D22] text-gray-200 border-gray-800 w-[90px]">
-      {iconMenu.map((item) => (
+      {iconMenu.map((item, index) => (
         <button
           key={item.label}
-          className="hover:bg-gray-800 p-2 rounded-xl transition"
+          className={`hover:bg-gray-800 p-2 rounded-xl transition ${index === iconMenu.length - 1 ? 'mt-auto bottom-0' : ''}`}
           title={item.label}
         >
           {item.icon}
