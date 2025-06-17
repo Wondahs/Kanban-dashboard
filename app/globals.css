@@ -3,7 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* add overrides or CSS variables here if needed */
+:root {
+  --toast-bg: #ffffff;
+  --toast-color: #1a1a1a;
+  --toast-border: #e5e7eb;
+}
+
+.dark {
+  --toast-bg: #2A2B2F;
+  --toast-color: #ffffff;
+  --toast-border: #3f3f46;
+}
 
 /* Custom scrollbar styles */
 @layer utilities {

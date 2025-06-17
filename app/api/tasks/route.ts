@@ -16,34 +16,24 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const {
-      title,
-      subtitle = null,
-      dueDate = null,
-      progressTotal = 10,
-      status = "TODO",
-    } = body;
+    const data = await request.json();
+    
+    const newTask = await prisma.task.create({
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        status: data.status,
+        progressCurrent: 0,
+        progressTotal: data.progressTotal || 10,
+        dueDate: data.dueDate ? new Date(data.dueDate) : null,
+      },
+    });
 
-    if (!title || typeof title !== "string") {
-      return NextResponse.json({ error: "Invalid title" }, { status: 400 });
-    }
-    const data: any = {
-      title,
-      progressTotal: Number(progressTotal) || 10,
-      progressCurrent: 0,
-      status,
-    };
-    if (subtitle) data.subtitle = subtitle;
-    if (dueDate) {
-      data.dueDate = new Date(dueDate);
-    }
-    const newTask = await prisma.task.create({ data });
-    return NextResponse.json({ task: newTask });
+    return NextResponse.json(newTask);
   } catch (error) {
-    console.error(error);
+    console.error('Error creating task:', error);
     return NextResponse.json(
-      { error: "Failed to create task" },
+      { error: 'Failed to create task' },
       { status: 500 }
     );
   }
@@ -51,29 +41,18 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const body = await request.json();
-    const { id, fields } = body;
-    if (!id || typeof id !== "string" || typeof fields !== "object") {
-      return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
-    }
-    const updateData: any = {};
-    if (fields.title !== undefined) updateData.title = fields.title;
-    if (fields.subtitle !== undefined) updateData.subtitle = fields.subtitle;
-    if (fields.progressCurrent !== undefined) updateData.progressCurrent = Number(fields.progressCurrent);
-    if (fields.progressTotal !== undefined) updateData.progressTotal = Number(fields.progressTotal);
-    if (fields.status !== undefined) updateData.status = fields.status;
-    if (fields.dueDate !== undefined) {
-      updateData.dueDate = fields.dueDate ? new Date(fields.dueDate) : null;
-    }
-    const updated = await prisma.task.update({
+    const { id, fields } = await request.json();
+    
+    const updatedTask = await prisma.task.update({
       where: { id },
-      data: updateData,
+      data: fields,
     });
-    return NextResponse.json({ task: updated });
+
+    return NextResponse.json(updatedTask);
   } catch (error) {
-    console.error(error);
+    console.error('Error updating task:', error);
     return NextResponse.json(
-      { error: "Failed to update task" },
+      { error: 'Failed to update task' },
       { status: 500 }
     );
   }
@@ -81,13 +60,18 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const body = await request.json();
-    const { id } = body;
-    if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
-    await prisma.task.delete({ where: { id } });
+    const { id } = await request.json();
+    
+    await prisma.task.delete({
+      where: { id },
+    });
+
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
+    console.error('Error deleting task:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete task' },
+      { status: 500 }
+    );
   }
 }
