@@ -7,7 +7,11 @@ export async function GET() {
       include: { assignedUsers: true },
       orderBy: { createdAt: "asc" },
     });
-    return NextResponse.json({ tasks });
+    return NextResponse.json(tasks, {
+      headers: {
+        'Cache-Control': 'no-store',
+      },
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Failed to fetch tasks" }, { status: 500 });
@@ -75,3 +79,5 @@ export async function DELETE(request: Request) {
     );
   }
 }
+
+export const dynamic = "force-dynamic";
